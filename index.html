@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS with RequireJS</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-main="main" src="http://requirejs.org/docs/release/2.1.14/minified/require.js"></script>
+    <script>window.require || document.write('<script data-main="main" src="local/path/require.js">\x3C/script>')</script>
+  </head>
+
+  <body class="ng-cloak">
+    <div ng-controller="MainController">
+      <p>Hello {{name}}!</p>
+      <div>{{time}}</div>
+    </div>
+    <div ng-controller="PizzaController" class="container">
+          <h1>Tony's Pizza</h1>
+
+          <h2>{{model.title}}</h2>
+
+          <h3>Topping Search</h3>
+          <input type="text" class="form-control" ng-model="model.search">
+
+          <div>
+              <div>
+                  Enter the search criteria above.
+              </div>
+
+              <div ng-show="model.search" ng-repeat="t in model.availableToppings | filter:model.search">
+                  <span ng-click="addTopping(t)">{{t}}</span>
+              </div>
+              <!--<div class="alert alert-error" role="alert" ng-show="model.availableToppings | filter:model.search == 0" >
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  No results <button ng-click="dismissMessage()">Close</button>
+              </div>-->
+              <div class="alert alert-success" role="alert" ng-show="success" >
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  Topping added <button ng-click="dismissMessage()">Close</button>
+              </div>
+
+              <h3 ng-if="model.toppings.length > 0">Selected Toppings</h3>
+              <div ng-repeat="t in model.toppings" >
+                  {{t}}
+              </div>
+          </div>
+    </div>
+  </body>
+
+</html>
